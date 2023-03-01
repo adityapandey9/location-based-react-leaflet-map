@@ -13,7 +13,7 @@
 
 ## How to run it?
 
-`
+```
 git clone https://github.com/adityapandey9/location-based-react-leaflet-map
 
 cd location-based-react-leaflet-map/
@@ -21,4 +21,4 @@ cd location-based-react-leaflet-map/
 npm install
 
 npm run start
-`
+```
