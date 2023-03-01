@@ -11,3 +11,14 @@
 2. This app use the `geoapify` to get the list of park near the user current location.
 3. When clicking on the marker, it will show the full address of the park as the detail view.
 
+## How to run it?
+
+`
+git clone https://github.com/adityapandey9/location-based-react-leaflet-map
+
+cd location-based-react-leaflet-map/
+
+npm install
+
+npm run start
+`
