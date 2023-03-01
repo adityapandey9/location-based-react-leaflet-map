@@ -5,7 +5,7 @@ import styles from "../style/app.module.css";
 import { getParkList } from "../util/api";
 
 
-export const RandomMarkerInMapBounds = () => {
+export const ParkMarkerInMapBounds = () => {
     const map = useMap();
     const ref = useRef({
         location: null
@@ -37,7 +37,7 @@ export const RandomMarkerInMapBounds = () => {
 
         legend.addTo(map);
 
-        // add "random" button
+        // add "park" button
         const dropDownTemplate = `
         <div class="${styles['select-dropdown']}">
         <label for="select-radius">Select Radius: </label>
@@ -56,7 +56,7 @@ export const RandomMarkerInMapBounds = () => {
             options: {
                 position: "topright",
                 title: "Select Radius",
-                className: styles.leafletRandomMarker,
+                className: styles.leafletparkMarker,
             },
 
             // method
@@ -89,7 +89,7 @@ export const RandomMarkerInMapBounds = () => {
                     .on(container.querySelector('#select-radius'), "change", removeMarkers)
                     .on(container.querySelector('#select-radius'), "change", (item) => {
                         setIsLoading(true);
-                        randomMarker(ref.current.location, item.target.value);
+                        parkMarker(ref.current.location, item.target.value);
                     });
 
                 return this._container;
@@ -99,15 +99,15 @@ export const RandomMarkerInMapBounds = () => {
         // adding new button to map controll
         map.addControl(new customControl());
 
-        // random color
+        // park color
         // ------------------------------
-        const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
+        const parkColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
         // add feature group to map
         const fg = L.featureGroup().addTo(map);
 
-        // create random marker
-        async function randomMarker(latLng, radius = 5000) {
+        // create park marker
+        async function parkMarker(latLng, radius = 5000) {
 
             if (!latLng) return;
 
@@ -123,7 +123,7 @@ export const RandomMarkerInMapBounds = () => {
                     let allPoints = [];
                     let allPointsDetails = [];
 
-                    // generate random points and add to array 'allPoints'
+                    // generate park points and add to array 'allPoints'
                     for (let i = 0; i < parkList['features'].length; i++) {
                         let points = parkList['features'][i]['geometry']['coordinates'].reverse();
                         allPoints.push(points);
@@ -136,7 +136,7 @@ export const RandomMarkerInMapBounds = () => {
                             icon: L.divIcon({
                                 className: "custom-icon-marker",
                                 iconSize: L.point(40, 40),
-                                html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker"><path fill-opacity="0.25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/><path stroke="#fff" fill="#${randomColor()}" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/></svg>`,
+                                html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker"><path fill-opacity="0.25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/><path stroke="#fff" fill="#${parkColor()}" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/></svg>`,
                                 iconAnchor: [12, 24],
                                 popupAnchor: [9, -26],
                             }),
@@ -158,10 +158,10 @@ export const RandomMarkerInMapBounds = () => {
             fg.clearLayers();
         }
 
-        // initialize random marker
+        // initialize park marker
         map.on('locationfound', (event) => {
             ref.current.location = event.latlng;
-            randomMarker(event.latlng);
+            parkMarker(event.latlng);
         })
     }, [map]);
 

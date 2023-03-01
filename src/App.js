@@ -1,7 +1,7 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import tileLayer from "./util/tileLayer";
-import { RandomMarkerInMapBounds } from './components/randomMarkerInMapBounds';
+import { ParkMarkerInMapBounds } from './components/parkMarkerInMapBounds';
 import './App.css'
 
 const center = [52.22977, 21.01178];
@@ -18,7 +18,7 @@ function App() {
         >
           <TileLayer {...tileLayer} />
 
-          <RandomMarkerInMapBounds />
+          <ParkMarkerInMapBounds />
         </MapContainer>
       </main>
     </div>
